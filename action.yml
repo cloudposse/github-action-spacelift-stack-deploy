@@ -9,6 +9,9 @@ inputs:
     required: true
     description: "Spacelift stack"
     default: "true"
+  github_token:
+    required: true
+    description: "GitHub Token"
 outputs:
   result1:
     description: "Output result placeholder"
@@ -19,7 +22,7 @@ runs:
     - name: Install spacectl
       uses: spacelift-io/setup-spacectl@main
       env:
-        GITHUB_TOKEN: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.github_token }}
     - id: context
       shell: bash
       run: |

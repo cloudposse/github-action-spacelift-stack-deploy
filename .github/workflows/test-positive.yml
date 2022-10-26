@@ -26,6 +26,8 @@ jobs:
         id: current
         with:
           stack: plat-ue2-sandbox-ecs-service-example-app
+          github_token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
+
 
     outputs:
       result: "${{ steps.current.outputs.result1 }}"
