@@ -26,4 +26,4 @@ runs:
     - id: context
       shell: bash
       run: |
-        spacectl --version
+        spacectl stack list
