@@ -39,8 +39,5 @@ runs:
         SPACELIFT_API_KEY_ID: ${{ inputs.api_key_id  }}
         SPACELIFT_API_KEY_SECRET: ${{ inputs.api_key_secret  }}
       run: |
-        spacectl --help
-        spacectl stack --help
-        spacectl stack deploy --help
-        spacectl stack outputs --help
         spacectl stack deploy --id=${{ inputs.stack }} --tail
+        spacectl stack outputs --id=${{ inputs.stack }} --no-color --format json
