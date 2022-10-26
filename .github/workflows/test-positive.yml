@@ -27,7 +27,9 @@ jobs:
         with:
           stack: plat-ue2-sandbox-ecs-service-example-app
           github_token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
-
+          organization: ${{ secrets.SPACELIFT_ORGANZATION }}
+          api_key_id: ${{ secrets.SPACELIFT_API_KEY_ID }}
+          api_key_secret: ${{ secrets.SPACELIFT_API_KEY_SECRET }}
 
     outputs:
       result: "${{ steps.current.outputs.result1 }}"

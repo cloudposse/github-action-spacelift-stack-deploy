@@ -5,6 +5,15 @@ branding:
   icon: 'file'
   color: 'white'
 inputs:
+  organization:
+    required: true
+    description: "Spacelift organization"
+  api_key_id:
+    required: true
+    description: "Spacelift API key id"
+  api_key_secret:
+    required: true
+    description: "Spacelift API key secret"
   stack:
     required: true
     description: "Spacelift stack"
@@ -26,6 +35,8 @@ runs:
     - id: context
       shell: bash
       env:
-        SPACELIFT_API_KEY_ENDPOINT: https://cloudposse.app.spacelift.io
+        SPACELIFT_API_KEY_ENDPOINT: https://${{ inputs.organization }}.app.spacelift.io
+        SPACELIFT_API_KEY_ID: ${{ inputs.api_key_id  }}
+        SPACELIFT_API_KEY_SECRET: ${{ inputs.api_key_secret  }}
       run: |
         spacectl profile login default --help
