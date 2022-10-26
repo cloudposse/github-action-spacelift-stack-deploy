@@ -54,9 +54,7 @@ runs:
           sed 's/\\"]"/"]/g'   | \
           sed 's/"\\"/"/g'     | \
           sed 's/\\""/"/g'     | \
-          sed 's/\\"/"/g'      | \
-          sed -e 's/\t/\\t/g' | \
-          jq . -c -e -M
+          sed 's/\\"/"/g'
         
         echo "=============================="
         echo $RESULT | jq . -c -e -M
