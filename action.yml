@@ -20,5 +20,4 @@ runs:
     - id: context
       shell: bash
       run: |
-          echo "::set-output name=action-result::${{ inputs.param1 }}"
-
+        spacectl --version
