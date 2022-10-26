@@ -16,7 +16,10 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - uses: be-streamlined/action-setup-spacectl@v1.0.1
+    - name: Install spacectl
+      uses: spacelift-io/setup-spacectl@main
+      env:
+        GITHUB_TOKEN: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
     - id: context
       shell: bash
       run: |
