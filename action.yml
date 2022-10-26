@@ -42,4 +42,5 @@ runs:
         spacectl --help
         spacectl stack --help
         spacectl stack deploy --help
+        spacectl stack output --help
         spacectl stack deploy --id=${{ inputs.stack }} --tail
