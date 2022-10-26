@@ -25,7 +25,7 @@ jobs:
       - uses: ./
         id: current
         with:
-          param1: 'true'
+          stack: plat-ue2-sandbox-ecs-service-example-app
 
     outputs:
       result: "${{ steps.current.outputs.result1 }}"
