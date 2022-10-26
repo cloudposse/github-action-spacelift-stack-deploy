@@ -46,4 +46,3 @@ runs:
       run: |
         spacectl stack deploy --id=${{ inputs.stack }} --tail
         RESULT=$(spacectl stack outputs --id=${{ inputs.stack }} --no-color --output json)
-        echo "result=${RESULT}" >> $GITHUB_OUTPUT
