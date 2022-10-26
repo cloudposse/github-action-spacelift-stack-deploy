@@ -28,4 +28,4 @@ runs:
       env:
         SPACELIFT_API_KEY_ENDPOINT: https://cloudposse.app.spacelift.io
       run: |
-        spacectl stack list
+        spacectl profile login default --help
