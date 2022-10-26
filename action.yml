@@ -25,5 +25,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github_token }}
     - id: context
       shell: bash
+      env:
+        SPACELIFT_API_KEY_ENDPOINT: https://cloudposse.app.spacelift.io
       run: |
         spacectl stack list
