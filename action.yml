@@ -22,9 +22,9 @@ inputs:
     required: true
     description: "GitHub Token"
 outputs:
-  result1:
-    description: "Output result placeholder"
-    value: "${{ inputs.param1 }}"
+  outputs:
+    description: "Spacelift stack outputs"
+    value: "${{ steps.spacelift.outputs.result }}"
 runs:
   using: "composite"
   steps:
@@ -32,7 +32,12 @@ runs:
       uses: spacelift-io/setup-spacectl@main
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
-    - id: context
+
+    - name: 'Setup jq'
+      uses: dcarbone/install-jq-action@v1.0.0
+
+    - id: spacelift
+      name: Spacelift deploy
       shell: bash
       env:
         SPACELIFT_API_KEY_ENDPOINT: https://${{ inputs.organization }}.app.spacelift.io
@@ -40,5 +45,5 @@ runs:
         SPACELIFT_API_KEY_SECRET: ${{ inputs.api_key_secret  }}
       run: |
         spacectl stack deploy --id=${{ inputs.stack }} --tail
-        spacectl stack outputs --id=${{ inputs.stack }} --no-color --output json
-        spacectl stack logs --help
+        spacectl stack outputs --id=${{ inputs.stack }} --no-color --output json | jq . -c -e -R -M
+        echo "result=test" >> $GITHUB_OUTPUT
