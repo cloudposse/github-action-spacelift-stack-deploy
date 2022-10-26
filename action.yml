@@ -16,7 +16,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - uses: be-streamlined/action-setup-spacectl@v1
+    - uses: be-streamlined/action-setup-spacectl@v1.0.1
     - id: context
       shell: bash
       run: |
