@@ -31,26 +31,20 @@ jobs:
           api_key_id: ${{ secrets.SPACELIFT_API_KEY_ID }}
           api_key_secret: ${{ secrets.SPACELIFT_API_KEY_SECRET }}
 
-      - uses: cloudposse/github-action-secret-outputs@0.1.0
-        id: result
-        with:
-          secret: ${{ secrets.GHA_SECRET_OUTPUT_PASSPHRASE }}
-          op: encode
-          in: ${{ steps.current.outputs.outputs }}
-
     outputs:
-      outputs: ${{ steps.result.outputs.out }}
+      success: true
 
   assert:
     runs-on: ubuntu-latest
     needs: [test]
-    if: ${{ failure() }}
+    if: ${{ always() }}
     steps:
       - run: echo "${{ toJSON(needs) }}"
       - uses: nick-fields/assert-action@v1
         with:
-          expected: 'failure'
-          actual: "${{ needs.test.result }}"
+          expected: 'true'
+          comparison: 'notEqual'
+          actual: "${{ needs.test.outputs.success }}"
 
   teardown:
     runs-on: ubuntu-latest
