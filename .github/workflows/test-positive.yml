@@ -32,7 +32,7 @@ jobs:
           api_key_secret: ${{ secrets.SPACELIFT_API_KEY_SECRET }}
 
     outputs:
-      result: "${{ steps.current.outputs.result1 }}"
+      result: "${{ steps.current.outputs.outputs }}"
 
   assert:
     runs-on: ubuntu-latest
