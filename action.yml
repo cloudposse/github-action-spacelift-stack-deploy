@@ -48,14 +48,14 @@ runs:
         RESULT=$(spacectl stack outputs --id=${{ inputs.stack }} --no-color --output json)
         
         spacectl stack outputs --id=${{ inputs.stack }} --no-color --output json
-#             | \
-#          sed 's/"{\\"/{"/g'   | \
-#          sed 's/\\"}"/"}/g'   | \
-#          sed 's/"\[\\"/\["/g' | \
-#          sed 's/\\"]"/"]/g'   | \
-#          sed 's/"\\"/"/g'     | \
-#          sed 's/\\""/"/g'     | \
-#          sed 's/\\"/"/g'
+                #             | \
+                #          sed 's/"{\\"/{"/g'   | \
+                #          sed 's/\\"}"/"}/g'   | \
+                #          sed 's/"\[\\"/\["/g' | \
+                #          sed 's/\\"]"/"]/g'   | \
+                #          sed 's/"\\"/"/g'     | \
+                #          sed 's/\\""/"/g'     | \
+                #          sed 's/\\"/"/g'
 
         echo "=============================="
         echo $RESULT | jq . -c -e -M
