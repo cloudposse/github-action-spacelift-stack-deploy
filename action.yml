@@ -5,19 +5,47 @@ branding:
   icon: 'file'
   color: 'white'
 inputs:
-  param1:
+  organization:
     required: true
-    description: "Input parameter placeholder"
+    description: "Spacelift organization"
+  api_key_id:
+    required: true
+    description: "Spacelift API key id"
+  api_key_secret:
+    required: true
+    description: "Spacelift API key secret"
+  stack:
+    required: true
+    description: "Spacelift stack"
     default: "true"
+  github_token:
+    required: true
+    description: "GitHub Token"
 outputs:
-  result1:
-    description: "Output result placeholder"
-    value: "${{ steps.context.outputs.action-result }}"
+  outputs:
+    description: "Spacelift stack outputs"
+    value: "${{ steps.spacelift.outputs.result }}"
 runs:
   using: "composite"
   steps:
-    - id: context
-      shell: bash
-      run: |
-          echo "::set-output name=action-result::${{ inputs.param1 }}"
+    - name: Install spacectl
+      uses: spacelift-io/setup-spacectl@main
+      env:
+        GITHUB_TOKEN: ${{ inputs.github_token }}
 
+    - name: 'Setup jq'
+      uses: dcarbone/install-jq-action@v1.0.0
+
+    - id: spacelift
+      name: Spacelift deploy
+      shell: bash
+      env:
+        SPACELIFT_API_KEY_ENDPOINT: https://${{ inputs.organization }}.app.spacelift.io
+        SPACELIFT_API_KEY_ID: ${{ inputs.api_key_id  }}
+        SPACELIFT_API_KEY_SECRET: ${{ inputs.api_key_secret  }}
+      run: |
+        spacectl stack deploy --id=${{ inputs.stack }} --tail
+        RESULT=$(spacectl stack outputs --id=${{ inputs.stack }} --no-color --output json | \
+          jq 'map({id: .id, value: (.value | fromjson) })' -c -e -M
+        )
+        echo "result=${RESULT}" >> $GITHUB_OUTPUT
