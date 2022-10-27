@@ -57,6 +57,4 @@ runs:
                 #          sed 's/\\""/"/g'     | \
                 #          sed 's/\\"/"/g'
 
-        echo "=============================="
-        echo $RESULT | jq . -c -e -M
-        # echo "result=${RESULT}" >> $GITHUB_OUTPUT
+        # echo "result=$(spacectl stack outputs --id=${{ inputs.stack }} --no-color --output json))" >> $GITHUB_OUTPUT
