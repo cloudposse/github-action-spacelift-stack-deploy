@@ -31,8 +31,11 @@ jobs:
           api_key_id: ${{ secrets.SPACELIFT_API_KEY_ID }}
           api_key_secret: ${{ secrets.SPACELIFT_API_KEY_SECRET }}
 
+      - id: result
+        run: echo "status=true" >> $GITHUB_OUTPUT
+
     outputs:
-      success: true
+      success: ${{ steps.result.outputs.status }}
 
   assert:
     runs-on: ubuntu-latest
@@ -45,6 +48,7 @@ jobs:
           expected: 'true'
           comparison: 'notEqual'
           actual: "${{ needs.test.outputs.success }}"
+
 
   teardown:
     runs-on: ubuntu-latest
