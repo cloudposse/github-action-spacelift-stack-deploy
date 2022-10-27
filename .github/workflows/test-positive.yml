@@ -36,7 +36,7 @@ jobs:
         with:
           secret: ${{ secrets.GHA_SECRET_OUTPUT_PASSPHRASE }}
           op: encode
-          in: ${{ steps.image.outputs.out }}
+          in: ${{ steps.current.outputs.outputs }}
 
     outputs:
       outputs: ${{ steps.result.outputs.out }}
