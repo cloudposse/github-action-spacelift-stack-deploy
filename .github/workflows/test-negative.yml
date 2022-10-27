@@ -46,6 +46,7 @@ jobs:
     needs: [test]
     if: ${{ always() }}
     steps:
+      - run: echo "${{ toJSON(needs) }}"
       - uses: nick-fields/assert-action@v1
         with:
           expected: 'failure'
