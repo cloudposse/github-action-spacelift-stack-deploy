@@ -22,6 +22,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - id: result
+        run: echo "status=true" >> $GITHUB_OUTPUT
+
       - uses: ./
         id: current
         with:
@@ -31,9 +34,6 @@ jobs:
           api_key_id: ${{ secrets.SPACELIFT_API_KEY_ID }}
           api_key_secret: ${{ secrets.SPACELIFT_API_KEY_SECRET }}
 
-      - id: result
-        run: echo "status=true" >> $GITHUB_OUTPUT
-
     outputs:
       success: ${{ steps.result.outputs.status }}
 
@@ -42,7 +42,6 @@ jobs:
     needs: [test]
     if: ${{ always() }}
     steps:
-      - run: echo "${{ toJSON(needs) }}"
       - uses: nick-fields/assert-action@v1
         with:
           expected: 'true'
