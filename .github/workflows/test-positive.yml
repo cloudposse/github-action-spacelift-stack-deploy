@@ -52,10 +52,18 @@ jobs:
           op: decode
           in: ${{ needs.test.outputs.outputs }}
 
+      - uses: edwardgeorge/jq-action@main
+        id: ecs_cluster
+        with:
+          compact: true
+          raw-output: true
+          input: ${{ steps.result.outputs.out }}
+          script: '.[2].id'
+
       - uses: nick-fields/assert-action@v1
         with:
-          expected: 'true'
-          actual: "${{ steps.result.outputs.out }}"
+          expected: 'ecs_cluster_arn'
+          actual: "${{ steps.ecs_cluster.outputs.output }}"
 
   teardown:
     runs-on: ubuntu-latest
