@@ -34,7 +34,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github_token }}
 
     - name: 'Setup jq'
-      uses: dcarbone/install-jq-action@v1.0.0
+      uses: dcarbone/install-jq-action@v1.0.1
 
     - id: spacelift
       name: Spacelift deploy
