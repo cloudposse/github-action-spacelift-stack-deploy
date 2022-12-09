@@ -1,8 +1,8 @@
-name: 'Example composite GitHub action'
-description: 'Example composite GitHub action'
+name: 'Spacelift stack deploy'
+description: 'Synchronously deploy Spacelift stack'
 author: hello@cloudposse.com
 branding:
-  icon: 'file'
+  icon: 'link-2'
   color: 'white'
 inputs:
   organization:
