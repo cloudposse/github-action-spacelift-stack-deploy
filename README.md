@@ -1,6 +1,8 @@
 
 <!-- markdownlint-disable -->
-# example-github-action-composite [![Latest Release](https://img.shields.io/github/release/cloudposse/example-github-action-composite.svg)](https://github.com/cloudposse/example-github-action-composite/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
+# github-action-spacelift-stack-deploy
+
+ [![Latest Release](https://img.shields.io/github/release/cloudposse/github-action-spacelift-stack-deploy.svg)](https://github.com/cloudposse/github-action-spacelift-stack-deploy/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
 <!-- markdownlint-restore -->
 
 [![README Header][readme_header_img]][readme_header_link]
@@ -28,7 +30,7 @@
 
 -->
 
-Template repository of composite GitHub Action
+Trigger Spacelist stack synchronously
 
 ---
 
@@ -58,8 +60,9 @@ It's 100% Open Source and licensed under the [APACHE2](LICENSE).
 
 ## Introduction
 
-This is template repository to create composite GitHub Actions. 
-Feel free to use it as reference and starting point.
+[Spacelift](https://spacelift.io) is a sophisticated, continuous integration 
+and deployment (CI/CD) platform for infrastructure-as-code. 
+The GitHub action triggers Spacelift stack run to provistion infrastructure.
 
 
 
@@ -77,17 +80,20 @@ Feel free to use it as reference and starting point.
       types: [opened, synchronize, reopened, closed, labeled, unlabeled]
 
   jobs:
-    context:
+    infrastructure:
       runs-on: ubuntu-latest
       steps:
-        - name: Example action
-          uses: cloudposse/example-github-action-composite@main
-          id: example
+        - uses: cloudposse/github-action-spacelift-stack-deploy@main
+          id: spacelift
           with:
-            param1: true
+            stack: eks-cluster
+            github_token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
+            organization: acme
+            api_key_id: ${{ secrets.SPACELIFT_API_KEY_ID }}
+            api_key_secret: ${{ secrets.SPACELIFT_API_KEY_SECRET }}
 
       outputs:
-        result: ${{ steps.example.outputs.result1 }}
+         outputs: ${{ steps.spacelift.outputs.outputs }}
 ```
 
 
@@ -101,25 +107,25 @@ Feel free to use it as reference and starting point.
 
 | Name | Description | Default | Required |
 |------|-------------|---------|----------|
-| api\_key\_id | Spacelift API key id | N/A | true |
-| api\_key\_secret | Spacelift API key secret | N/A | true |
-| github\_token | GitHub Token | N/A | true |
-| organization | Spacelift organization | N/A | true |
-| stack | Spacelift stack | true | true |
+| api\_key\_id | API Key ID | N/A | true |
+| api\_key\_secret | API Key Secret | N/A | true |
+| github\_token | GitHub Token (Required to install Spacelift CLI) | N/A | true |
+| organization | Organization | N/A | true |
+| stack | Stack | true | true |
 
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| outputs | Spacelift stack outputs |
+| outputs | Stack outputs |
 <!-- markdownlint-restore -->
 
 
 
 ## Share the Love
 
-Like this project? Please give it a ★ on [our GitHub](https://github.com/cloudposse/example-github-action-composite)! (it helps us **a lot**)
+Like this project? Please give it a ★ on [our GitHub](https://github.com/cloudposse/github-action-spacelift-stack-deploy)! (it helps us **a lot**)
 
 Are you using this project or any of our other projects? Consider [leaving a testimonial][testimonial]. =)
 
@@ -129,6 +135,7 @@ Are you using this project or any of our other projects? Consider [leaving a tes
 
 Check out these related projects.
 
+- [github-action-deploy-ecs](https://github.com/cloudposse/github-action-deploy-ecs) - Deploy Docker image to ECS with Spacelift
 
 
 ## References
@@ -143,7 +150,7 @@ For additional context, refer to some of these links.
 
 **Got a question?** We got answers.
 
-File a GitHub [issue](https://github.com/cloudposse/example-github-action-composite/issues), send us an [email][email] or join our [Slack Community][slack].
+File a GitHub [issue](https://github.com/cloudposse/github-action-spacelift-stack-deploy/issues), send us an [email][email] or join our [Slack Community][slack].
 
 [![README Commercial Support][readme_commercial_support_img]][readme_commercial_support_link]
 
@@ -191,7 +198,7 @@ Sign up for [our newsletter][newsletter] that covers everything on our technolog
 
 ### Bug Reports & Feature Requests
 
-Please use the [issue tracker](https://github.com/cloudposse/example-github-action-composite/issues) to report any bugs or file feature requests.
+Please use the [issue tracker](https://github.com/cloudposse/github-action-spacelift-stack-deploy/issues) to report any bugs or file feature requests.
 
 ### Developing
 
@@ -279,33 +286,33 @@ Check out [our other projects][github], [follow us on twitter][twitter], [apply 
 [![Beacon][beacon]][website]
 <!-- markdownlint-disable -->
   [logo]: https://cloudposse.com/logo-300x69.svg
-  [docs]: https://cpco.io/docs?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=docs
-  [website]: https://cpco.io/homepage?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=website
-  [github]: https://cpco.io/github?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=github
-  [jobs]: https://cpco.io/jobs?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=jobs
-  [hire]: https://cpco.io/hire?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=hire
-  [slack]: https://cpco.io/slack?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=slack
-  [linkedin]: https://cpco.io/linkedin?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=linkedin
-  [twitter]: https://cpco.io/twitter?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=twitter
-  [testimonial]: https://cpco.io/leave-testimonial?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=testimonial
-  [office_hours]: https://cloudposse.com/office-hours?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=office_hours
-  [newsletter]: https://cpco.io/newsletter?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=newsletter
-  [discourse]: https://ask.sweetops.com/?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=discourse
-  [email]: https://cpco.io/email?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=email
-  [commercial_support]: https://cpco.io/commercial-support?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=commercial_support
-  [we_love_open_source]: https://cpco.io/we-love-open-source?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=we_love_open_source
-  [terraform_modules]: https://cpco.io/terraform-modules?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=terraform_modules
+  [docs]: https://cpco.io/docs?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=docs
+  [website]: https://cpco.io/homepage?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=website
+  [github]: https://cpco.io/github?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=github
+  [jobs]: https://cpco.io/jobs?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=jobs
+  [hire]: https://cpco.io/hire?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=hire
+  [slack]: https://cpco.io/slack?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=slack
+  [linkedin]: https://cpco.io/linkedin?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=linkedin
+  [twitter]: https://cpco.io/twitter?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=twitter
+  [testimonial]: https://cpco.io/leave-testimonial?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=testimonial
+  [office_hours]: https://cloudposse.com/office-hours?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=office_hours
+  [newsletter]: https://cpco.io/newsletter?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=newsletter
+  [discourse]: https://ask.sweetops.com/?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=discourse
+  [email]: https://cpco.io/email?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=email
+  [commercial_support]: https://cpco.io/commercial-support?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=commercial_support
+  [we_love_open_source]: https://cpco.io/we-love-open-source?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=we_love_open_source
+  [terraform_modules]: https://cpco.io/terraform-modules?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=terraform_modules
   [readme_header_img]: https://cloudposse.com/readme/header/img
-  [readme_header_link]: https://cloudposse.com/readme/header/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=readme_header_link
+  [readme_header_link]: https://cloudposse.com/readme/header/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=readme_header_link
   [readme_footer_img]: https://cloudposse.com/readme/footer/img
-  [readme_footer_link]: https://cloudposse.com/readme/footer/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=readme_footer_link
+  [readme_footer_link]: https://cloudposse.com/readme/footer/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=readme_footer_link
   [readme_commercial_support_img]: https://cloudposse.com/readme/commercial-support/img
-  [readme_commercial_support_link]: https://cloudposse.com/readme/commercial-support/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/example-github-action-composite&utm_content=readme_commercial_support_link
-  [share_twitter]: https://twitter.com/intent/tweet/?text=example-github-action-composite&url=https://github.com/cloudposse/example-github-action-composite
-  [share_linkedin]: https://www.linkedin.com/shareArticle?mini=true&title=example-github-action-composite&url=https://github.com/cloudposse/example-github-action-composite
-  [share_reddit]: https://reddit.com/submit/?url=https://github.com/cloudposse/example-github-action-composite
-  [share_facebook]: https://facebook.com/sharer/sharer.php?u=https://github.com/cloudposse/example-github-action-composite
-  [share_googleplus]: https://plus.google.com/share?url=https://github.com/cloudposse/example-github-action-composite
-  [share_email]: mailto:?subject=example-github-action-composite&body=https://github.com/cloudposse/example-github-action-composite
-  [beacon]: https://ga-beacon.cloudposse.com/UA-76589703-4/cloudposse/example-github-action-composite?pixel&cs=github&cm=readme&an=example-github-action-composite
+  [readme_commercial_support_link]: https://cloudposse.com/readme/commercial-support/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-spacelift-stack-deploy&utm_content=readme_commercial_support_link
+  [share_twitter]: https://twitter.com/intent/tweet/?text=github-action-spacelift-stack-deploy&url=https://github.com/cloudposse/github-action-spacelift-stack-deploy
+  [share_linkedin]: https://www.linkedin.com/shareArticle?mini=true&title=github-action-spacelift-stack-deploy&url=https://github.com/cloudposse/github-action-spacelift-stack-deploy
+  [share_reddit]: https://reddit.com/submit/?url=https://github.com/cloudposse/github-action-spacelift-stack-deploy
+  [share_facebook]: https://facebook.com/sharer/sharer.php?u=https://github.com/cloudposse/github-action-spacelift-stack-deploy
+  [share_googleplus]: https://plus.google.com/share?url=https://github.com/cloudposse/github-action-spacelift-stack-deploy
+  [share_email]: mailto:?subject=github-action-spacelift-stack-deploy&body=https://github.com/cloudposse/github-action-spacelift-stack-deploy
+  [beacon]: https://ga-beacon.cloudposse.com/UA-76589703-4/cloudposse/github-action-spacelift-stack-deploy?pixel&cs=github&cm=readme&an=github-action-spacelift-stack-deploy
 <!-- markdownlint-restore -->
