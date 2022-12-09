@@ -7,23 +7,23 @@ branding:
 inputs:
   organization:
     required: true
-    description: "Spacelift organization"
+    description: "Organization"
   api_key_id:
     required: true
-    description: "Spacelift API key id"
+    description: "API Key ID"
   api_key_secret:
     required: true
-    description: "Spacelift API key secret"
+    description: "API Key Secret"
   stack:
     required: true
-    description: "Spacelift stack"
+    description: "Stack"
     default: "true"
   github_token:
     required: true
-    description: "GitHub Token"
+    description: "GitHub Token (Required to install Spacelift CLI)"
 outputs:
   outputs:
-    description: "Spacelift stack outputs"
+    description: "Stack outputs"
     value: "${{ steps.spacelift.outputs.result }}"
 runs:
   using: "composite"

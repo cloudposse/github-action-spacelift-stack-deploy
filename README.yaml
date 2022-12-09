@@ -5,7 +5,7 @@
 #
 
 # Name of this project
-name: example-github-action-composite
+name: github-action-spacelift-stack-deploy
 
 # Tags of this project
 tags:
@@ -18,25 +18,30 @@ tags:
 license: "APACHE2"
 
 # Canonical GitHub repo
-github_repo: cloudposse/example-github-action-composite
+github_repo: cloudposse/github-action-spacelift-stack-deploy
 
 # Badges to display
 badges:
   - name: "Latest Release"
-    image: "https://img.shields.io/github/release/cloudposse/example-github-action-composite.svg"
-    url: "https://github.com/cloudposse/example-github-action-composite/releases/latest"
+    image: "https://img.shields.io/github/release/cloudposse/github-action-spacelift-stack-deploy.svg"
+    url: "https://github.com/cloudposse/github-action-spacelift-stack-deploy/releases/latest"
   - name: "Slack Community"
     image: "https://slack.cloudposse.com/badge.svg"
     url: "https://slack.cloudposse.com"
 
-related: []
+related:
+  - name: "github-action-deploy-ecs"
+    description: "Deploy Docker image to ECS with Spacelift"
+    url: "https://github.com/cloudposse/github-action-deploy-ecs"
+
 
 # Short description of this project
-description: Template repository of composite GitHub Action
+description: Trigger Spacelist stack synchronously
 
 introduction: |-
-  This is template repository to create composite GitHub Actions. 
-  Feel free to use it as reference and starting point.
+  [Spacelift](https://spacelift.io) is a sophisticated, continuous integration 
+  and deployment (CI/CD) platform for infrastructure-as-code. 
+  The GitHub action triggers Spacelift stack run to provistion infrastructure.
 
 references:
   - name: "github-actions-workflows"
@@ -56,17 +61,20 @@ usage: |-
         types: [opened, synchronize, reopened, closed, labeled, unlabeled]
 
     jobs:
-      context:
+      infrastructure:
         runs-on: ubuntu-latest
         steps:
-          - name: Example action
-            uses: cloudposse/example-github-action-composite@main
-            id: example
+          - uses: cloudposse/github-action-spacelift-stack-deploy@main
+            id: spacelift
             with:
-              param1: true
+              stack: eks-cluster
+              github_token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
+              organization: acme
+              api_key_id: ${{ secrets.SPACELIFT_API_KEY_ID }}
+              api_key_secret: ${{ secrets.SPACELIFT_API_KEY_SECRET }}
   
         outputs:
-          result: ${{ steps.example.outputs.result1 }}
+           outputs: ${{ steps.spacelift.outputs.outputs }}
   ```
 
 include:
