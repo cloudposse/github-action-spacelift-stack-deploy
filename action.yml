@@ -16,8 +16,7 @@ inputs:
     description: "API Key Secret"
   stack:
     required: true
-    description: "Stack"
-    default: "true"
+    description: "Stack name"
   github_token:
     required: true
     description: "GitHub Token (Required to install Spacelift CLI)"
