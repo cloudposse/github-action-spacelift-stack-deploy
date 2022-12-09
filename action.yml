@@ -7,16 +7,16 @@ branding:
 inputs:
   organization:
     required: true
-    description: "Organization"
+    description: "Organization name"
+  stack:
+    required: true
+    description: "Stack name"
   api_key_id:
     required: true
     description: "API Key ID"
   api_key_secret:
     required: true
     description: "API Key Secret"
-  stack:
-    required: true
-    description: "Stack name"
   github_token:
     required: true
     description: "GitHub Token (Required to install Spacelift CLI)"
