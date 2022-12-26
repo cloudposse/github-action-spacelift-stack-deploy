@@ -25,7 +25,7 @@ jobs:
       - uses: ./
         id: current
         with:
-          stack: plat-ue2-sandbox-ecs-service-example-app
+          stack: plat-ue2-sandbox-test-github-action
           github_token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
           organization: ${{ secrets.SPACELIFT_ORGANZATION }}
           api_key_id: ${{ secrets.SPACELIFT_API_KEY_ID }}
