@@ -58,7 +58,7 @@ jobs:
           compact: true
           raw-output: true
           input: ${{ steps.result.outputs.out }}
-          script: 'map(select(.id == "result")) | .[0].id'
+          script: 'map(select(.id == "result")) | .[0].value'
 
       - uses: nick-fields/assert-action@v1
         with:
