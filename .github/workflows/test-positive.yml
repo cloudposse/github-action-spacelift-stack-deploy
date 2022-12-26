@@ -25,7 +25,7 @@ jobs:
       - uses: ./
         id: current
         with:
-          stack: plat-ue2-sandbox-ecs-service-example-app
+          stack: plat-ue2-sandbox-test-github-action
           github_token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
           organization: ${{ secrets.SPACELIFT_ORGANZATION }}
           api_key_id: ${{ secrets.SPACELIFT_API_KEY_ID }}
@@ -53,17 +53,17 @@ jobs:
           in: ${{ needs.test.outputs.outputs }}
 
       - uses: edwardgeorge/jq-action@main
-        id: ecs_cluster
+        id: stack_output
         with:
           compact: true
           raw-output: true
           input: ${{ steps.result.outputs.out }}
-          script: 'map(select(.id == "ecs_cluster_arn")) | .[0].id'
+          script: 'map(select(.id == "result")) | .[0].value'
 
       - uses: nick-fields/assert-action@v1
         with:
-          expected: 'ecs_cluster_arn'
-          actual: "${{ steps.ecs_cluster.outputs.output }}"
+          expected: 'success'
+          actual: "${{ steps.stack_output.outputs.output }}"
 
   teardown:
     runs-on: ubuntu-latest
