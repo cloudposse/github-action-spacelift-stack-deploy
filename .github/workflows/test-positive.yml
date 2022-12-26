@@ -53,7 +53,7 @@ jobs:
           in: ${{ needs.test.outputs.outputs }}
 
       - uses: edwardgeorge/jq-action@main
-        id: full_host
+        id: stack_output
         with:
           compact: true
           raw-output: true
@@ -63,7 +63,7 @@ jobs:
       - uses: nick-fields/assert-action@v1
         with:
           expected: 'success'
-          actual: "${{ steps.ecs_cluster.outputs.output }}"
+          actual: "${{ steps.stack_output.outputs.output }}"
 
   teardown:
     runs-on: ubuntu-latest
