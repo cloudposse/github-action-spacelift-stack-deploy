@@ -31,7 +31,7 @@ jobs:
           api_key_id: ${{ secrets.SPACELIFT_API_KEY_ID }}
           api_key_secret: ${{ secrets.SPACELIFT_API_KEY_SECRET }}
 
-      - uses: cloudposse/github-action-secret-outputs@0.1.0
+      - uses: cloudposse/github-action-secret-outputs@0.1.1
         id: result
         with:
           secret: ${{ secrets.GHA_SECRET_OUTPUT_PASSPHRASE }}
@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test]
     steps:
-      - uses: cloudposse/github-action-secret-outputs@0.1.0
+      - uses: cloudposse/github-action-secret-outputs@0.1.1
         id: result
         with:
           secret: ${{ secrets.GHA_SECRET_OUTPUT_PASSPHRASE }}
