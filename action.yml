@@ -11,6 +11,10 @@ inputs:
   stack:
     required: true
     description: "Stack name"
+  autodeploy:
+    required: false
+    description: "If true, automatically deploy the stack without manual confirmation"
+    default: false
   api_key_id:
     required: true
     description: "API Key ID"
@@ -43,7 +47,12 @@ runs:
         SPACELIFT_API_KEY_ID: ${{ inputs.api_key_id  }}
         SPACELIFT_API_KEY_SECRET: ${{ inputs.api_key_secret  }}
       run: |
-        spacectl stack deploy --id=${{ inputs.stack }} --tail
+        if [ "${{ inputs.autodeploy }}" = "true" ]; then
+          spacectl stack deploy --id=${{ inputs.stack }} --tail --auto-confirm
+        else
+          spacectl stack deploy --id=${{ inputs.stack }} --tail
+        fi
+
         RESULT=$(spacectl stack outputs --id=${{ inputs.stack }} --no-color --output json | \
           jq 'map({id: .id, value: (.value | fromjson) })' -c -e -M
         )
