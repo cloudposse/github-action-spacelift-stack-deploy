@@ -14,7 +14,7 @@ inputs:
   autodeploy:
     required: false
     description: "If true, automatically deploy the stack without manual confirmation"
-    default: false
+    default: "false"
   api_key_id:
     required: true
     description: "API Key ID"
