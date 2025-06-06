@@ -2,8 +2,11 @@
 
 <!-- markdownlint-disable -->
 <a href="https://cpco.io/homepage"><img src="https://github.com/cloudposse/github-action-spacelift-stack-deploy/blob/main/.github/banner.png?raw=true" alt="Project Banner"/></a><br/>
-    <p align="right">
-<a href="https://github.com/cloudposse/github-action-spacelift-stack-deploy/releases/latest"><img src="https://img.shields.io/github/release/cloudposse/github-action-spacelift-stack-deploy.svg" alt="Latest Release"/></a><a href="https://slack.cloudposse.com"><img src="https://slack.cloudposse.com/badge.svg" alt="Slack Community"/></a></p>
+
+
+<p align="right"><a href="https://github.com/cloudposse/github-action-spacelift-stack-deploy/releases/latest"><img src="https://img.shields.io/github/release/cloudposse/github-action-spacelift-stack-deploy.svg?style=for-the-badge" alt="Latest Release"/></a><a href="https://github.com/cloudposse/github-action-spacelift-stack-deploy/commits"><img src="https://img.shields.io/github/last-commit/cloudposse/github-action-spacelift-stack-deploy.svg?style=for-the-badge" alt="Last Updated"/></a><a href="https://cloudposse.com/slack"><img src="https://slack.cloudposse.com/for-the-badge.svg" alt="Slack Community"/></a>
+
+</p>
 <!-- markdownlint-restore -->
 
 <!--
@@ -72,26 +75,10 @@ The GitHub action triggers Spacelift stack run to provistion infrastructure.
 
 
 
-<!-- markdownlint-disable -->
-
-## Inputs
-
-| Name | Description | Default | Required |
-|------|-------------|---------|----------|
-| api\_key\_id | API Key ID | N/A | true |
-| api\_key\_secret | API Key Secret | N/A | true |
-| autodeploy | If true, automatically deploy the stack without manual confirmation | false | false |
-| github\_token | GitHub Token (Required to install Spacelift CLI) | N/A | true |
-| organization | Organization name | N/A | true |
-| stack | Stack name | N/A | true |
 
 
-## Outputs
 
-| Name | Description |
-|------|-------------|
-| outputs | Stack outputs |
-<!-- markdownlint-restore -->
+
 
 
 ## Related Projects
